@@ -80,21 +80,26 @@ pod-reader   2021-07-28T21:09:48Z
 $ kubectl get rolebindings
 NAME        ROLE              AGE
 read-pods   Role/pod-reader   74s
-
+```
+8. Проверка что получилось:
+```bash
 $ kubectl create namespace ns-test
 Error from server (Forbidden): namespaces is forbidden: User "user1" cannot create resource "namespaces" in API group "" at the cluster scope
 
-kubectl get pods
+$ kubectl get pods
+Error from server (Forbidden): pods is forbidden: User "user1" cannot list resource "pods" in API group "" in the namespace "default"
 
 ```
-https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b
+К сожалению, следуя документации, ничего не получилось.
+
+Информация взята из [официального сайта](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) и [источника](https://medium.com/@HoussemDellai/rbac-with-kubernetes-in-minikube-4deed658ea7b).
 ## Задание 3:
-8. Увеличиваем количество реплик в нашем развёртывании и проверяем что получилось:
+9. Увеличиваем количество реплик в нашем развёртывании и проверяем что получилось:
 ```bash
 $ kubectl scale --replicas=5 deployment hello-node
 deployment.apps/hello-node scaled
 ```
-9. Видно, что количество стало 5 штук, причём две работали давно (видно по времени), три - новые.
+10. Видно, что количество стало 5 штук, причём две работали давно (видно по времени), три - новые.
 ```bash
 $ kubectl get pods
 NAME                          READY   STATUS    RESTARTS   AGE
