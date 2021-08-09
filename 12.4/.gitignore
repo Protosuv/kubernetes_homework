@@ -1,2 +1,4 @@
 kube-install/
 vagrant/.vagrant
+inventory/local
+inventory/sample
