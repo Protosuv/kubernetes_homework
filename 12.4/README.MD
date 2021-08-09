@@ -38,6 +38,28 @@ DEBUG: adding host node1 to group all
 $ ansible-playbook -i inventory/kube-test/hosts.yaml --become --become-user=root --become-method sudo cluster.yml -u vagrant
 ```
 В какой-то момент произошла ошибка, в которой было указано, что недостаточно ОЗУ на нодах.В связи с этим, было решено увеличить объём ОЗУ на рабочих нодах до 2Гб.  
-Установка продолжилась корректно, но далее завершилась, из-за исчерпания свободного места на хостовой системе, где хранятся диски ВМ от Virtualbox. Увеличить место технически у меня не удастся.
+Установка продолжилась корректно, но далее завершилась, из-за исчерпания свободного места на хостовой системе, где хранятся диски ВМ от Virtualbox. Увеличить место технически у меня не удастся.  
+8. Для проверки работоспособности было решено создать 5 штук дроплетов в [Digital Ocean](https://www.digitalocean.com/ "Digital Ocean") на базе также Ubuntu 20.04 LTS.  
+После создания дроплетов, по аналогии как и ВМ в Virtualbox, был создан инвентарь, а затем запущена роль командой:  
+```bash
+$ ansible-playbook -i inventory/digocean-test/hosts.yaml cluster.yml -u root
+```
+Примерно через 17 минут, кластер был развёрнут.  
+Вход в управляющую ноду и запуск kubectl:  
+```bash
+~# kubectl get nodes
+NAME    STATUS   ROLES                  AGE   VERSION
+node1   Ready    control-plane,master   12m   v1.21.3
+node2   Ready    <none>                 11m   v1.21.3
+node3   Ready    <none>                 11m   v1.21.3
+node4   Ready    <none>                 11m   v1.21.3
+node5   Ready    <none>                 11m   v1.21.3
+```
+Видно, что в кластере у нас 5 нод, одна из которых управляющая.  
+В кластере нет никаких ресурсов, что показывает команда:  
+```bash
+$ kubectl get pods
+No resources found in default namespace.
+```
 
 
