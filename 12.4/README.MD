@@ -31,6 +31,7 @@ DEBUG: adding host node1 to group all
 ....
 ```
 Затем было проведено ревью получившегося файла hosts.yaml, в котором etcd был оставлен только на первой ноде (как и control plane).  
+Итоговый инвентарь находится в [папке](https://github.com/Protosuv/kubernetes_homework/tree/master/12.4/inventory/kube-test).  
 6. Согласно задачи, нам требуется использовать в качестве container runtime - containerd. Для чего мы вносим правки в нужные файлы согласно [статьи](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/containerd.md "официальная статья").  
 7. Затем производится установка k8s на запущенные ВМ (команду пришлось подбирать опытным путём, из-за выпадения в ошибку таски):
 ```bash
