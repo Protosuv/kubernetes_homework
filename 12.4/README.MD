@@ -17,5 +17,24 @@ node2                     running (virtualbox)
 node3                     running (virtualbox)
 node4                     running (virtualbox)
 ```
+5. После этого, можно подготовить файл инвертаря, причём сделать это автоматически по [инструкции](https://github.com/kubernetes-sigs/kubespray "инструкции") на сайте:
+```bash
+$ declare -a IPS=(192.168.10.21 192.168.10.22 192.168.10.23 192.168.10.24 192.168.10.25)
+$ CONFIG_FILE=inventory/kube-test/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
+DEBUG: Adding group all
+DEBUG: Adding group kube_control_plane
+DEBUG: Adding group kube_node
+DEBUG: Adding group etcd
+DEBUG: Adding group k8s_cluster
+DEBUG: Adding group calico_rr
+DEBUG: adding host node1 to group all
+....
+```
+Затем было проведено ревью получившегося файла hosts.yaml, в котором etcd был оставлен только на первой ноде (как и control plane).  
+6. Затем производится установка k8s на запущенные ВМ (команду пришлось подбирать опытным путём, из-за выпадения в ошибку таски):
+```bash
+$ ansible-playbook -i inventory/kube-test/hosts.yaml --become --become-user=root --become-method sudo cluster.yml -u vagrant
+```
+В какой-то момент произошла ошибка, в которой было указано, что недостаточно ОЗУ на нодах.В связи с этим, было решено увеличить объём ОЗУ на рабочих нодах до 2Гб.
 
 
