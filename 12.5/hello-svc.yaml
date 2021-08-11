@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-deployment
+  name: hello-svc
   labels:
-    run: hello
+    app: hello
 spec:
   ports:
   - port: 8080
     protocol: TCP
   selector:
-    run: hello
+    app: hello
