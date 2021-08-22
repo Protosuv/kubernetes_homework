@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-site-dep
+spec:
+  selector:
+    matchLabels:
+      run: my-site
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: my-site
+    spec:
+      containers:
+        - image: protosuv/backend:latest
+          name: backend
+          ports:
+            - containerPort: 9000
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      
+        - image: protosuv/frontend:latest
+          name: frontend
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      restartPolicy: Always
+status: {}
