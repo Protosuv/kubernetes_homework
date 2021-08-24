@@ -4,3 +4,4 @@
 3. ДЗ по теме [12.3 Развертывание кластера на собственных серверах, лекция 1](https://github.com/Protosuv/kubernetes_homework/tree/master/12.3 "12.3 Развертывание кластера на собственных серверах, лекция 1")
 4. ДЗ по теме [12.4 Развертывание кластера на собственных серверах, лекция 2](https://github.com/Protosuv/kubernetes_homework/tree/master/12.4 "12.4 Развертывание кластера на собственных серверах, лекция 2")
 5. ДЗ по теме [12.5 Сетевые решения CNI](https://github.com/Protosuv/kubernetes_homework/tree/master/12.5 "12.5 Сетевые решения CNI")
+6. ДЗ по теме [13.1 контейнеры, поды, deployment, statefulset, services, endpoints](https://github.com/Protosuv/kubernetes_homework/tree/master/13.1 "13.1 контейнеры, поды, deployment, statefulset, services, endpoints")

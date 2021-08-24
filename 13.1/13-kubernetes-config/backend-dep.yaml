@@ -1,19 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nginx
+  name: backend-dep
 spec:
   selector:
     matchLabels:
-      run: my-nginx
-  replicas: 2
+      run: backend
+  replicas: 1
   template:
     metadata:
       labels:
-        run: my-nginx
+        run: backend
     spec:
       containers:
-      - name: my-nginx
-        image: nginx
-        ports:
-        - containerPort: 80
+        - image: protosuv/backend:latest
+          name: backend
+          ports:
+            - containerPort: 9000
+          env:
+          - name: DATABASE_URL
+            value: postgres://postgres:postgres@10.233.96.6:5432/news
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      restartPolicy: Always
+status: {}
