@@ -4,6 +4,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgresql-db
+  namespace: test
 spec:
   serviceName: postgresql-db-service
   selector:
@@ -22,11 +23,18 @@ spec:
       containers:
       - name: postgresql-db
         image: postgres:latest
+        ports:
+          - containerPort: 5432
         volumeMounts:
           - name: postgres-pv-storage
             mountPath: /var/lib/postgresql/data/
         env:
           - name: POSTGRES_PASSWORD
-            value: testpassword
+            value: postgres
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_DB
+            value: news
           - name: PGDATA
             value: /var/lib/postgresql/data/
+        

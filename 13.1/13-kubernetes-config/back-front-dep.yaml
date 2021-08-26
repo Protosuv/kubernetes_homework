@@ -1,25 +1,38 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-dep
+  name: backend-frontend-dep
+  namespace: test
+  labels:
+    run: backfront
 spec:
   selector:
     matchLabels:
-      run: backend
+      run: backfront
   replicas: 1
   template:
     metadata:
       labels:
-        run: backend
+        run: backfront
     spec:
       containers:
         - image: protosuv/backend:latest
           name: backend
-          ports:
-            - containerPort: 9000
           env:
           - name: DATABASE_URL
-            value: postgres://postgres:postgres@10.233.96.6:5432/news
+            value: postgres://postgres:postgres@db:5432/news
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+        - image: protosuv/frontend:latest
+          name: frontend
+          ports:
+            - containerPort: 80
           resources:
             limits:
               memory: 512Mi
