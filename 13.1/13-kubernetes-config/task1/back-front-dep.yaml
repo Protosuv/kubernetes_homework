@@ -31,6 +31,9 @@ spec:
               cpu: "0.2"
         - image: protosuv/frontend:latest
           name: frontend
+          env: 
+          - name: BASE_URL
+            value: http://localhost:9000 
           ports:
             - containerPort: 80
           resources:
