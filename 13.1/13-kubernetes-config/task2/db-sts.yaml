@@ -1,0 +1,40 @@
+---
+# PostgreSQL StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql-db
+  namespace: prod
+spec:
+  serviceName: postgresql-db-service
+  selector:
+    matchLabels:
+      app: postgresql-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgresql-db
+    spec:
+      volumes:
+      - name: postgres-pv-storage
+        persistentVolumeClaim:
+          claimName: postgresql-pv-claim-prod
+      containers:
+      - name: postgresql-db
+        image: postgres:latest
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: postgres-pv-storage
+            mountPath: /var/lib/postgresql/data/
+        env:
+          - name: POSTGRES_PASSWORD
+            value: postgres
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_DB
+            value: news
+          - name: PGDATA
+            value: /var/lib/postgresql/data/
+        

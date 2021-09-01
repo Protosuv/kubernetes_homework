@@ -61,24 +61,80 @@ db     ClusterIP   10.233.48.109   <none>        5432/TCP   32s   app=postgresql
 ```
 1.5. Теперь запускаем развёртывание пода с бэкендом и фронтендом:
 ```bash
-$ (master)kubectl apply -f back-front-dep.yaml 
+$ kubectl apply -f back-front-dep.yaml 
 deployment.apps/backend-frontend-dep created
-$ (master)kubectl get pods -n test -o wide
+$ kubectl get pods -n test -o wide
 NAME                                    READY   STATUS    RESTARTS   AGE   IP             NODE    NOMINATED NODE   READINESS GATES
 backend-frontend-dep-7d9999bffd-mx2sz   2/2     Running   0          14s   10.233.96.21   node2   <none>           <none>
 postgresql-db-0                         1/1     Running   0          11m   10.233.96.20   node2   <none>           <none>
 ```
 Заводим в кластере новый сервис, чтобы можно было получить доступ к фронту снаружи кластера:
 ```bash
-$ (master)kubectl apply -f front-svc.yaml 
+$ kubectl apply -f front-svc.yaml 
 service/frontend created
 
-$ (master)kubectl get svc -n test -o wide
+$ kubectl get svc -n test -o wide
 NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
 db         ClusterIP   10.233.48.109   <none>        5432/TCP         4m39s   app=postgresql-db
 frontend   NodePort    10.233.32.204   <none>        8080:30988/TCP   3s      run=backfront
 ```
+Все файлы находятся по [пути](https://github.com/Protosuv/kubernetes_homework/tree/master/13.1/13-kubernetes-config/task1 "путь").  
 Теперь по внешнему адресу сервера по указанному порту будет доступно наше приложение:  
 ![Страница приложения](https://github.com/Protosuv/kubernetes_homework/blob/master/13.1/13-kubernetes-config/kuber_13.1_1.png "Страница приложения")
 
+2. В этом задании мы используем наработки из предыдущего задания и разделим компоненты приложения по разным развёртываниям. В частности, в нашем случае мы разносим фронтенд и бекенд, а сервис для СУБД у нас уже имеется и его можно не трогать.  
+Требуется создать файл с развёртыванием для бекенда и добавить для него сервис.  
+Последовательность действий аналогичная предшествующему заданию:  
+  - разворачиваем неймспейс
+  - разворачиваем PV и PVC для СУБД и разворачиваем СУБД с сервисом
+  - разворачиваем фронтенд и бекенд и их сервисы
+  - тестируем работу
+```bash
+$ kubectl apply -f db-pv.yaml
+persistentvolume/postgresql-pv-volume-prod created
+persistentvolumeclaim/postgresql-pv-claim-prod created
+$ kubectl get pv -o wide
+NAME                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                           STORAGECLASS   REASON   AGE   VOLUMEMODE
+postgresql-pv-volume-prod   10Gi       RWO            Retain           Bound    prod/postgresql-pv-claim-prod   manual                  51s   Filesystem
 
+$ kubectl apply -f db-sts.yaml 
+statefulset.apps/postgresql-db created
+$ kubectl get sts -n prod -o wide
+NAME            READY   AGE   CONTAINERS      IMAGES
+postgresql-db   1/1     83s   postgresql-db   postgres:latest
+
+$ kubectl apply -f db-svc.yaml 
+service/db created
+$ kubectl get svc -n prod -o wide
+NAME   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+db     ClusterIP   10.233.12.83   <none>        5432/TCP   26s   app=postgresql-db
+
+$ kubectl apply -f back
+back-svc.yaml  back.yaml
+$ kubectl apply -f back-svc.yaml 
+service/backend created
+$ kubectl get svc -n prod -o wide
+NAME      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE    SELECTOR
+backend   ClusterIP   10.233.21.122   <none>        9000/TCP   30s    run=backend
+$ kubectl get deploy -n prod -o wide
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                    SELECTOR
+backend-dep   1/1     1            1           71s   backend      protosuv/backend:latest   run=backend
+
+$ kubectl apply -f front.yaml 
+deployment.apps/frontend-dep created
+$ kubectl apply -f front-svc.yaml 
+service/frontend created
+$ kubectl get deploy -n prod -o wide
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES                     SELECTOR
+backend-dep    1/1     1            1           2m15s   backend      protosuv/backend:latest    run=backend
+frontend-dep   1/1     1            1           32s     frontend     protosuv/frontend:latest   run=frontend
+
+$ kubectl get svc -n prod -o wide
+NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+backend    ClusterIP   10.233.21.122   <none>        9000/TCP         2m23s   run=backend
+db         ClusterIP   10.233.12.83    <none>        5432/TCP         3m35s   app=postgresql-db
+frontend   NodePort    10.233.54.214   <none>        8000:32091/TCP   48s     run=frontend
+```
+Все файлы находятся по [пути](https://github.com/Protosuv/kubernetes_homework/tree/master/13.1/13-kubernetes-config/task2 "путь").
+Теперь по внешнему адресу сервера по указанному порту будет доступно наше приложение:  
+![Страница приложения](https://github.com/Protosuv/kubernetes_homework/blob/master/13.1/13-kubernetes-config/kuber_13.1_2.png "Страница приложения")

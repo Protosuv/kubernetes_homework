@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    run: backend
+  namespace: prod
+spec:
+  ports:
+  - name: backend
+    port: 9000
+    targetPort: 9000
+    protocol: TCP
+  selector:
+    run: backend
+  type: ClusterIP
