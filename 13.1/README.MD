@@ -79,5 +79,5 @@ db         ClusterIP   10.233.48.109   <none>        5432/TCP         4m39s   ap
 frontend   NodePort    10.233.32.204   <none>        8080:30988/TCP   3s      run=backfront
 ```
 Теперь по внешнему адресу сервера по указанному порту будет доступно наше приложение:  
-![Страница приложения](https://github.com/Protosuv/kubernetes_homework/tree/master/13.1/13-kubernetes-config/kuber_13.1_1.png "Страница приложения")
+![Страница приложения](https://github.com/Protosuv/kubernetes_homework/blob/master/13.1/13-kubernetes-config/kuber_13.1_1.png "Страница приложения")
 
