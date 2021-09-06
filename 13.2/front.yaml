@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-dep
+  namespace: prod
+  labels:
+    run: frontend
+spec:
+  selector:
+    matchLabels:
+      run: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: frontend
+    spec:
+      volumes:
+      - name: content-storage
+        persistentVolumeClaim:
+          claimName: my-pvc
+      containers:
+        - name: frontend
+          image: protosuv/frontend:latest 
+          volumeMounts:
+          - name: content-storage
+            mountPath: /static
+          env: 
+          - name: BASE_URL
+            value: http://backend:9000
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "0.5"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      restartPolicy: Always
+status: {}

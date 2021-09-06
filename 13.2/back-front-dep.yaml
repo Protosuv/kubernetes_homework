@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-frontend-dep
+  namespace: prod
+  labels:
+    run: backfront
+spec:
+  selector:
+    matchLabels:
+      run: backfront
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: backfront
+    spec:
+      containers:
+        - image: protosuv/backend:latest
+          name: backend
+          env:
+          - name: DATABASE_URL
+            value: postgres://postgres:postgres@db:5432/news
+          volumeMounts:
+          - mountPath: /static/
+            name: static
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+        - image: protosuv/frontend:latest
+          name: frontend
+          env: 
+          - name: BASE_URL
+            value: http://localhost:9000
+          volumeMounts:
+          - mountPath: /static/
+            name: static
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      restartPolicy: Always
+      volumes:
+      - name: static
+        emptyDir: {}
+status: {}

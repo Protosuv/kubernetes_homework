@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-dep
+  namespace: prod
+  labels:
+    run: backend
+spec:
+  selector:
+    matchLabels:
+      run: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: backend
+    spec:
+      volumes:
+      - name: content-storage
+        persistentVolumeClaim:
+          claimName: content-claim
+      containers:
+        - name: backend
+          image: protosuv/backend:latest
+          volumeMounts:
+          - name: content-storage
+            mountPath: /static
+          env:
+          - name: DATABASE_URL
+            value: postgres://postgres:postgres@db:5432/news
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "0.5"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      restartPolicy: Always
+status: {}
