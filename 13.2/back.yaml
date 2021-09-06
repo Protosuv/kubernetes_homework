@@ -25,7 +25,7 @@ spec:
           image: protosuv/backend:latest
           volumeMounts:
           - name: content-storage
-            mountPath: /static
+            mountPath: /static2
           env:
           - name: DATABASE_URL
             value: postgres://postgres:postgres@db:5432/news
