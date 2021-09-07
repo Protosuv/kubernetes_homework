@@ -16,16 +16,12 @@ spec:
       labels:
         run: backend
     spec:
-      volumes:
-      - name: content-storage
-        persistentVolumeClaim:
-          claimName: content-claim
       containers:
         - name: backend
           image: protosuv/backend:latest
           volumeMounts:
-          - name: content-storage
-            mountPath: /static2
+          - name: content
+            mountPath: /static/
           env:
           - name: DATABASE_URL
             value: postgres://postgres:postgres@db:5432/news
@@ -37,4 +33,8 @@ spec:
               memory: 256Mi
               cpu: "0.2"
       restartPolicy: Always
+      volumes:
+      - name: content
+        persistentVolumeClaim:
+          claimName: content-claim
 status: {}

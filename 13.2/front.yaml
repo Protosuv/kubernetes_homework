@@ -16,16 +16,12 @@ spec:
       labels:
         run: frontend
     spec:
-      volumes:
-      - name: content-storage
-        persistentVolumeClaim:
-          claimName: my-pvc
       containers:
         - name: frontend
           image: protosuv/frontend:latest 
           volumeMounts:
-          - name: content-storage
-            mountPath: /static
+          - name: content
+            mountPath: /static/
           env: 
           - name: BASE_URL
             value: http://backend:9000
@@ -39,4 +35,8 @@ spec:
               memory: 256Mi
               cpu: "0.2"
       restartPolicy: Always
+      volumes:
+      - name: content
+        persistentVolumeClaim:
+          claimName: content-claim
 status: {}
