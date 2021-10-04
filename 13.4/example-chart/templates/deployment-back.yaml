@@ -1,16 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "example-chart.fullname" . }}
+  name: {{ include "example-chart.fullname" . }}-backend
   labels:
     {{- include "example-chart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCount.backend }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "example-chart.selectorLabels" . | nindent 6 }}
+      {{- toYaml .Values.labels.backend | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,6 +20,7 @@ spec:
       {{- end }}
       labels:
         {{- include "example-chart.selectorLabels" . | nindent 8 }}
+        {{- toYaml .Values.labels.backend | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -28,25 +30,27 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-backend
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.backend.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
+            - name: backend
+              containerPort: {{ .Values.service.backend.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.endpoint.backend }}
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: {{ .Values.endpoint.backend }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            {{- toYaml .Values.env.backend | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
