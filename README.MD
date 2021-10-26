@@ -5,3 +5,7 @@
 4. ДЗ по теме [12.4 Развертывание кластера на собственных серверах, лекция 2](https://github.com/Protosuv/kubernetes_homework/tree/master/12.4 "12.4 Развертывание кластера на собственных серверах, лекция 2")
 5. ДЗ по теме [12.5 Сетевые решения CNI](https://github.com/Protosuv/kubernetes_homework/tree/master/12.5 "12.5 Сетевые решения CNI")
 6. ДЗ по теме [13.1 контейнеры, поды, deployment, statefulset, services, endpoints](https://github.com/Protosuv/kubernetes_homework/tree/master/13.1 "13.1 контейнеры, поды, deployment, statefulset, services, endpoints")
+7. ДЗ по теме [13.2 Разделы и монтирование](https://github.com/Protosuv/kubernetes_homework/tree/master/13.2 "13.2 Разделы и монтирование")
+8. ДЗ по теме [13.3 Работа с kubectl](https://github.com/Protosuv/kubernetes_homework/tree/master/13.3 "13.3 Работа с kubectl")
+9. ДЗ по теме [13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet](https://github.com/Protosuv/kubernetes_homework/tree/master/13.3 "13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet")
+
