@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "example-chart.fullname" . }}-backend
+  name: {{ include "my-chart.fullname" . }}-frontend
   labels:
-    {{- include "example-chart.labels" . | nindent 4 }}
+    {{- include "my-chart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount.backend }}
+  replicas: {{ .Values.replicaCount.frontend }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "example-chart.selectorLabels" . | nindent 6 }}
-      {{- toYaml .Values.labels.backend | nindent 6 }}
+      {{- include "my-chart.selectorLabels" . | nindent 6 }}
+      {{- toYaml .Values.labels.frontend | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,38 +19,38 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "example-chart.selectorLabels" . | nindent 8 }}
-        {{- toYaml .Values.labels.backend | nindent 8 }}
+        {{- include "my-chart.selectorLabels" . | nindent 8 }}
+        {{- toYaml .Values.labels.frontend | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "example-chart.serviceAccountName" . }}
+      serviceAccountName: {{ include "my-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}-backend
+        - name: {{ .Chart.Name }}-frontend
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.backend.repository }}:{{ .Values.image.backend.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.backend.pullPolicy }}
+          image: "{{ .Values.image.frontend.repository }}:{{ .Values.image.frontend.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.frontend.pullPolicy }}
           ports:
-            - name: backend
-              containerPort: {{ .Values.service.backend.port }}
+            - name: frontend
+              containerPort: {{ .Values.service.frontend.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.endpoint.backend }}
+              port: {{ .Values.endpoint.frontend }}
           readinessProbe:
             httpGet:
               path: /
-              port: {{ .Values.endpoint.backend }}
+              port: {{ .Values.endpoint.frontend }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            {{- toYaml .Values.env.backend | nindent 12 }}
+            {{- toYaml .Values.env.frontend | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

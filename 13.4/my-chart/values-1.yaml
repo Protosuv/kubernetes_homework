@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: v1.netology.example
+      paths:
+      - path: /
+        backend:
+          servicePort: 8080
+
+env:    
+  front:
+    - name: BASE_URL
+      value: http://localhost:9000
