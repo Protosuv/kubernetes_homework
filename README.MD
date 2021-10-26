@@ -7,5 +7,5 @@
 6. ДЗ по теме [13.1 контейнеры, поды, deployment, statefulset, services, endpoints](https://github.com/Protosuv/kubernetes_homework/tree/master/13.1 "13.1 контейнеры, поды, deployment, statefulset, services, endpoints")
 7. ДЗ по теме [13.2 Разделы и монтирование](https://github.com/Protosuv/kubernetes_homework/tree/master/13.2 "13.2 Разделы и монтирование")
 8. ДЗ по теме [13.3 Работа с kubectl](https://github.com/Protosuv/kubernetes_homework/tree/master/13.3 "13.3 Работа с kubectl")
-9. ДЗ по теме [13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet](https://github.com/Protosuv/kubernetes_homework/tree/master/13.3 "13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet")
+9. ДЗ по теме [13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet](https://github.com/Protosuv/kubernetes_homework/tree/master/13.4 "13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet")
 
