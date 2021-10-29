@@ -6,7 +6,7 @@
 Поиск информации по возможным системам, позволяющим реализовать функционал API Gateway показал весьма обширные результаты. Некоторые продукты уже давно на рынке, некоторые совсем недавно. В итоге получился такой список:  
 **Azure  
 Istio  
-Yandex API Gateway
+Yandex API Gateway  
 Amazon API Gateway  
 Oracle API Gateway  
 Google API Gateway (Apigee API Management)    
@@ -18,9 +18,11 @@ Tyk API Gateway**
 
 ## Задача 2: Брокер сообщений
 
+---
+
 Анализ многочисленной информации в сети интернет как за последние годы, так и в принципе, показал, что есть такие продукты, реализующие функционал MQ.
 
-**RocketMQ 
+**RocketMQ   
 ZeroMQ  
 Kafka  
 RabbitMQ  
