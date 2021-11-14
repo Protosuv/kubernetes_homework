@@ -11,4 +11,5 @@
 10. ДЗ по теме [13.3 Работа с kubectl](https://github.com/Protosuv/kubernetes_homework/tree/master/13.3 "13.3 Работа с kubectl")
 11. ДЗ по теме [13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet](https://github.com/Protosuv/kubernetes_homework/tree/master/13.4 "13.4 инструменты для упрощения написания конфигурационных файлов. Helm и Jsonnet")
 12. ДЗ по теме [13.5 поддержка нескольких окружений на примере Qbec](https://github.com/Protosuv/kubernetes_homework/tree/master/13.4 "13.5 поддержка нескольких окружений на примере Qbec")
+13. ДЗ по теме [14.1 Создание и использование секретов](https://github.com/Protosuv/kubernetes_homework/tree/master/14.1 "14.1 Создание и использование секретов")
 
