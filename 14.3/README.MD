@@ -3,7 +3,7 @@
 ## Задача 1: Работа с картами конфигураций через утилиту kubectl в установленном minikube
 
 ### Как создать карту конфигураций?
-_Работа осуществляется с кластером из 3х нод в DigitalOcean.
+_Работа осуществляется с кластером из 3х нод в DigitalOcean._
 ```bash
 _$ kubectl create configmap nginx-config --from-file=nginx.conf
 configmap/nginx-config created
