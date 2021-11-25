@@ -13,4 +13,5 @@
 12. ДЗ по теме [13.5 поддержка нескольких окружений на примере Qbec](https://github.com/Protosuv/kubernetes_homework/tree/master/13.5 "13.5 поддержка нескольких окружений на примере Qbec")
 13. ДЗ по теме [14.1 Создание и использование секретов](https://github.com/Protosuv/kubernetes_homework/tree/master/14.1 "14.1 Создание и использование секретов")
 14. ДЗ по теме [14.2 Синхронизация секретов с внешними сервисами. Vault](https://github.com/Protosuv/kubernetes_homework/tree/master/14.2 "14.2 Синхронизация секретов с внешними сервисами. Vault")
+15. ДЗ по теме [14.3 Карты конфигураций](https://github.com/Protosuv/kubernetes_homework/tree/master/14.3 "14.3 Карты конфигураций")
 
