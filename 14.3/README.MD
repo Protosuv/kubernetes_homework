@@ -208,3 +208,60 @@ $ kubectl get configmap nginx-config
 NAME           DATA   AGE
 nginx-config   1      26s
 ```
+
+## Задача 2 (*): Работа с картами конфигураций внутри модуля
+Для работы были найдены примеры в которых в контейнер nginx монтируется nginx.conf файл из configmap, причём поды формируются при помощи deployment. Для работы был выбран неймспейс prod. Для его формирования в кластере, я взял уже готовый манифест, который использовался в прошлых ДЗ.
+1. Первоначально был создан неймспейс prod в кластере, для размещения там configmap и собственно подов.
+
+```bash
+$ kubectl apply -f ns-prod.yaml
+namespace/prod created
+```
+
+2. Далее в этом неймспейсе я создал configmap:
+
+```bash
+$ kubectl apply -f nginx-config.yml
+configmap/nginx-conf created
+$ kubectl get configmap -n prod
+NAME               DATA   AGE
+kube-root-ca.crt   1      23h
+nginx-conf         1      14s
+```
+
+3. На этом этапе можно создать deployment из манифеста:
+
+```bash
+$ kubectl apply -f myapp.yaml
+deployment.apps/nginx created
+$ kubectl get deploy -n prod
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   1/1     1            1           9s
+$ kubectl get pods -n prod
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-5668b5dfbb-jmb9r   1/1     Running   0          15s
+```
+
+4. Видно что развёртывание готово, под также активен, можно посмотреть, что внутри:
+
+```bash
+$ kubectl exec -n prod nginx-5668b5dfbb-jmb9r -i -t -- bash -il
+root@nginx-5668b5dfbb-jmb9r:/# cat /etc/nginx/nginx.conf
+user nginx;
+worker_processes  1;
+events {
+  worker_connections  10240;
+}
+http {
+  server {
+      listen       80;
+      server_name  localhost;
+      location / {
+        root   /usr/share/nginx/html; #Change this line
+        index  index.html index.htm;
+    }
+  }
+}
+```
+
+То есть мы видим содержимое файла nginx.conf из манифеста, которым создавался configmap.
