@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2021-12-05T18:46:12Z"
+  name: netology
+  namespace: default
+  resourceVersion: "6299558"
+  uid: 6c7dc642-5de7-42fc-b020-b0a7e2120e07
+secrets:
+- name: netology-token-wp2xq
