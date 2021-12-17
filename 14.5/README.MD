@@ -1,0 +1,1 @@
+# Домашнее задание к занятию "14.5 SecurityContext, NetworkPolicies"
