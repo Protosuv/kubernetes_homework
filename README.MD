@@ -15,4 +15,5 @@
 14. ДЗ по теме [14.2 Синхронизация секретов с внешними сервисами. Vault](https://github.com/Protosuv/kubernetes_homework/tree/master/14.2 "14.2 Синхронизация секретов с внешними сервисами. Vault")
 15. ДЗ по теме [14.3 Карты конфигураций](https://github.com/Protosuv/kubernetes_homework/tree/master/14.3 "14.3 Карты конфигураций")
 16. ДЗ по теме [14.4 Сервис-аккаунты](https://github.com/Protosuv/kubernetes_homework/tree/master/14.4 "14.4 Сервис-аккаунты")
+17. ДЗ по теме [14.5 SecurityContext, NetworkPolicies](https://github.com/Protosuv/kubernetes_homework/tree/master/14.5 "14.5 SecurityContext, NetworkPolicies")
 
