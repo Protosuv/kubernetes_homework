@@ -16,6 +16,5 @@
 15. ДЗ по теме [14.3 Карты конфигураций](https://github.com/Protosuv/kubernetes_homework/tree/master/14.3 "14.3 Карты конфигураций")
 16. ДЗ по теме [14.4 Сервис-аккаунты](https://github.com/Protosuv/kubernetes_homework/tree/master/14.4 "14.4 Сервис-аккаунты")
 17. ДЗ по теме [14.5 SecurityContext, NetworkPolicies](https://github.com/Protosuv/kubernetes_homework/tree/master/14.5 "14.5 SecurityContext, NetworkPolicies")
-18. ДЗ по теме [Домашнее задание к занятию "15.1. Организация сети](https://github.com/Protosuv/kubernetes_homework/tree/master/15.1 "Домашнее задание к занятию "15.1. Организация сети")
-19. ДЗ по теме [Домашнее задание к занятию 15.2 "Вычислительные мощности. Балансировщики нагрузки"](https://github.com/Protosuv/kubernetes_homework/tree/master/15.2 "Домашнее задание к занятию 15.2 "Вычислительные мощности. Балансировщики нагрузки")
-
+18. ДЗ по теме [Домашнее задание к занятию "15.1. Организация сети"](https://github.com/Protosuv/kubernetes_homework/tree/master/15.1 "Домашнее задание к занятию: 15.1: Организация сети")
+19. ДЗ по теме [Домашнее задание к занятию 15.2 "Вычислительные мощности. Балансировщики нагрузки"](https://github.com/Protosuv/kubernetes_homework/tree/master/15.2 "Домашнее задание к занятию 15.2: Вычислительные мощности. Балансировщики нагрузки")
