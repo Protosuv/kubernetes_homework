@@ -37,7 +37,3 @@ output "server2_public_dns" {
 output "region" {
   value = "us-east-2"
 }
-
-output "subnet_id" {
-  value = aws_subnet.demo-subnet.id
-}

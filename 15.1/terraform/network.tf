@@ -1,16 +1,4 @@
 
-module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
-  name = "netology-vpc"
-  cidr = "172.31.0.0/16"
-  azs = ["us-east-2a", "us-east-2b", "us-east-2c"]
-
-  tags = {
-    Terraform = "true"
-    Environment = "development"
-  }
-}
-
 /* Public */
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.netology-vpc.id
@@ -45,7 +33,7 @@ resource "aws_route_table_association" "netology-rta1" {
 resource "aws_instance" "server1" {
   ami           = data.aws_ami.centos.id
   instance_type = local.web_instance_type_map[terraform.workspace]
-  key_name  = aws_key_pair.laptop
+  key_name  = aws_key_pair.laptop.key_name
   count = local.web_instance_count_map[terraform.workspace]
   subnet_id = aws_subnet.public.id
   availability_zone = var.aws-av-zone
@@ -60,7 +48,7 @@ resource "aws_instance" "server1" {
 /* Private */
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.netology-vpc.id
-  cidr_block = "172.31.88.0/19"
+  cidr_block = "172.31.64.0/19"
   availability_zone = var.aws-av-zone
 
   tags = {
@@ -102,7 +90,7 @@ resource "aws_route_table_association" "netology-rta2" {
 resource "aws_instance" "server2" {
   ami           = data.aws_ami.centos.id
   instance_type = local.web_instance_type_map[terraform.workspace]
-  key_name  = aws_key_pair.laptop
+  key_name  = aws_key_pair.laptop.key_name
   count = local.web_instance_count_map[terraform.workspace]
   subnet_id = aws_subnet.private.id
   availability_zone = var.aws-av-zone
