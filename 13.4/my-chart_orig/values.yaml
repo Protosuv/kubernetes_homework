@@ -1,25 +1,14 @@
-# Default values for chart.
+# Default values for my-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount:
-  frontend: 1
-  backend: 1
-  db: 1
+replicaCount: 1
 
 image:
-  frontend:
-    repository: protosuv/frontend
-    pullPolicy: Always
-    tag: "latest"
-  backend:
-    repository: protosuv/backend
-    pullPolicy: Always
-    tag: "latest"
-  db:
-    repository: postgres
-    pullPolicy: Always
-    tag: "latest"
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -48,23 +37,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  backend:
-    type: ClusterIP
-    port: 9000
-    targetPort: 9000
-  frontend:
-    type: NodePort
-    port: 80
-    targetPort: 8000
-  db:
-    type: ClusterIP
-    port: 5432
-    targetPort: 5432
-
-endpoint: 
-  frontend: 80
-  backend: 9000
-  db: 5432
+  type: ClusterIP
+  port: 80
 
 ingress:
   enabled: false
@@ -82,7 +56,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-# resources: {}
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -93,13 +67,6 @@ ingress:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-resources:
-  limits:
-    memory: 512Mi
-    cpu: "1"
-  requests:
-    memory: 256Mi
-    cpu: "0.2"
 
 autoscaling:
   enabled: false
@@ -113,33 +80,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-persistence:
-  enabled: true
-  accessMode: ReadWriteOnce
-  size: 10Gi
-
-env:
-  frontend:
-  - name: BASE_URL
-    value: http://backend:9000
-  backend:
-  - name: DATABASE_URL
-    value: postgres://postgres:postgres@db:5432/news 
-  db:
-  - name: POSTGRES_PASSWORD
-    value: postgres
-  - name: POSTGRES_USER
-    value: postgres
-  - name: POSTGRES_DB
-    value: news
-  - name: PGDATA
-    value: /var/lib/postgresql/data/
-
-labels:
-  frontend:
-    run: frontend
-  backend:
-    run: backend
-  db:
-    app: postgresql-db

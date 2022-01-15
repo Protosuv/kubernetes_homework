@@ -1,0 +1,52 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "data": {
+                "name": "netology.ru"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2021-11-25T21:33:52Z",
+                "name": "domain",
+                "namespace": "default",
+                "resourceVersion": "4863496",
+                "uid": "84bfa119-0095-4cb2-aa0e-274d1b13e0e9"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIU0u\n-----END CERTIFICATE-----\n"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2021-10-23T21:07:51Z",
+                "name": "kube-root-ca.crt",
+                "namespace": "default",
+                "resourceVersion": "413",
+                "uid": "fed5d094-fd31-4d19-8ddc-38ebf31e5a4e"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "nginx.conf": "daemon            off;\nworker_processes  2;\nuser              www-data;\n\nevents {\n    use           epoll;\n    worker_connections  128;\n}\n\nerror_log         logs/error.log info;\n\nhttp {\n    server_tokens off;\n    include       mime.types;\n    charset       utf-8;\n\n    access_log    logs/access.log  combined;\n\n    server {\n        server_name   localhost;\n        listen        127.0.0.1:80;\n\n        error_page    500 502 503 504  /50x.html;\n\n        location      / {\n            root      html;\n        }\n\n    }\n\n}"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2021-11-25T21:31:20Z",
+                "name": "nginx-config",
+                "namespace": "default",
+                "resourceVersion": "4863240",
+                "uid": "d8e2480f-e0b4-4050-a715-54981efbb3a6"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}

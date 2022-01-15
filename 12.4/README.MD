@@ -1,4 +1,5 @@
 # Домашнее задание к занятию "12.4 Развертывание кластера на собственных серверах, лекция 2"
+
 1. Для работы было решено использовать инструмент Vagrant, для быстрой подготовки 5 штук ВМ в Virtualbox.  
 2. В качестве дистрибутива был выбран Ubuntu 20.04.  
 3. Умолчания:  
@@ -7,6 +8,7 @@
    - на каждую ВМ передаётся ключ SSH с хостовой машины, чтобы иметь возможность подключения по ключу и использовать Ansible плейбуки (использование vagrant ssh также возможно);  
 4. Для запуска этих ВМ используется [Vagrantfile](https://github.com/Protosuv/kubernetes_homework/tree/master/12.4/vagrant/Vagrantfile "Vagrantfile").  
 После запуска, система сообщает о 5 запущенных ВМ:  
+
 ```bash
 $ (master)vagrant status 
 Current machine states:
@@ -17,7 +19,9 @@ node2                     running (virtualbox)
 node3                     running (virtualbox)
 node4                     running (virtualbox)
 ```
+
 5. После этого, можно подготовить файл инвертаря, причём сделать это автоматически по [инструкции](https://github.com/kubernetes-sigs/kubespray "инструкции") на сайте:
+
 ```bash
 $ declare -a IPS=(192.168.10.21 192.168.10.22 192.168.10.23 192.168.10.24 192.168.10.25)
 
@@ -49,6 +53,7 @@ $ ansible-playbook -i inventory/digocean-test/hosts.yaml cluster.yml -u root
 ```
 Примерно через 17 минут, кластер был развёрнут.  
 Вход в управляющую ноду и запуск kubectl:  
+
 ```bash
 ~# kubectl get nodes
 NAME    STATUS   ROLES                  AGE   VERSION
@@ -60,6 +65,7 @@ node5   Ready    <none>                 11m   v1.21.3
 ```
 Видно, что в кластере у нас 5 нод, одна из которых управляющая.  
 В кластере нет никаких ресурсов, что показывает команда:  
+
 ```bash
 $ kubectl get pods
 No resources found in default namespace.
