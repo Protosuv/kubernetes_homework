@@ -1,9 +1,10 @@
 # Local .terraform directories
 **/.terraform/*
 terraform/.terraform/
-
+terraform/certs/
+*.pem
 terraform2/
-myplan
+*plan
 # .tfstate files
 *.tfstate
 *.tfstate.*

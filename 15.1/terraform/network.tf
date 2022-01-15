@@ -49,7 +49,7 @@ resource "aws_instance" "server1" {
 /* Private */
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.netology-vpc.id
-  cidr_block = "172.31.64.0/19"
+  cidr_block = "172.31.96.0/19"
   availability_zone = var.aws-av-zone
 
   tags = {
@@ -97,7 +97,7 @@ resource "aws_instance" "server2" {
   availability_zone = var.aws-av-zone
   associate_public_ip_address = "true"
   security_groups = [ aws_security_group.netology-sg.id ]
-  private_ip = "172.31.88.5"
+  private_ip = "172.31.96.5"
   instance_initiated_shutdown_behavior = "stop"
   tags = {
     Name = "Server2"
