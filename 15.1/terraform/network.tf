@@ -45,6 +45,7 @@ resource "aws_instance" "server1" {
     Name = "Server1"
   }
 }
+
 /* Private */
 resource "aws_subnet" "private" {
   vpc_id     = aws_vpc.netology-vpc.id
