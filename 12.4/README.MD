@@ -20,6 +20,9 @@ node4                     running (virtualbox)
 5. После этого, можно подготовить файл инвертаря, причём сделать это автоматически по [инструкции](https://github.com/kubernetes-sigs/kubespray "инструкции") на сайте:
 ```bash
 $ declare -a IPS=(192.168.10.21 192.168.10.22 192.168.10.23 192.168.10.24 192.168.10.25)
+
+
+
 $ CONFIG_FILE=inventory/kube-test/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 DEBUG: Adding group all
 DEBUG: Adding group kube_control_plane
