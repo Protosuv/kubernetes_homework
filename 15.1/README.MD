@@ -75,4 +75,13 @@ PING 172.31.96.5 (172.31.96.5) 56(84) bytes of data.
 
 [centos@ip-172-31-96-5 ~]$
 ```
-
+Теперь проверим пингование до внешнего адреса mail.ru в качестве примера:
+```bash
+[centos@ip-172-31-96-5 ~]$ ping mail.ru
+PING mail.ru (217.69.139.200) 56(84) bytes of data.
+64 bytes from mail.ru (217.69.139.200): icmp_seq=1 ttl=37 time=171 ms
+64 bytes from mail.ru (217.69.139.200): icmp_seq=2 ttl=37 time=170 ms
+64 bytes from mail.ru (217.69.139.200): icmp_seq=3 ttl=37 time=170 ms
+64 bytes from mail.ru (217.69.139.200): icmp_seq=4 ttl=37 time=170 ms
+```
+Как видно, пингование работает, следовательно на сервере есть доступ к сети интернет.
