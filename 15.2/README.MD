@@ -14,6 +14,6 @@
 Часть настроек была размещена в прочих файлах проекта, где логически сгруппированы создание сетей, описание выходных переменных и т.д.  
 Все файлы проекта размещены в [папке](https://github.com/Protosuv/kubernetes_homework/tree/master/15.2/terraform "ссылка").
 Вход на адрес баллансировщика приводит к переброске на адрес одной из 3-х виртуальных машин. Причём обновление страницы приводит к ротации IP адреса ВМ которая избирается баллансировщиком в текущий момент времени (он был передан в виде переменной среды для отображения его в веб-содержимом страницы).  
-![Сервер 1](net_aws1.png "Сервер 1")  
-![Сервер 2](net_aws2.png "Сервер 2")  
-![Сервер 3](net_aws3.png "Сервер 3")  
+![Сервер 1](https://github.com/Protosuv/kubernetes_homework/blob/master/15.2/terraform/file/net_aws1.png/150x100 "Сервер 1")  
+![Сервер 2](https://github.com/Protosuv/kubernetes_homework/blob/master/15.2/terraform/file/net_aws2.png "Сервер 2")  
+![Сервер 3](https://github.com/Protosuv/kubernetes_homework/blob/master/15.2/terraform/file/net_aws3.png "Сервер 3")  
